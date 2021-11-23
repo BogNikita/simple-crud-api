@@ -1,6 +1,7 @@
 require('dotenv').config();
 const http = require('http');
 const uuid = require('uuid');
+const validationField = require('./validationField');
 
 const db = [];
 
@@ -52,11 +53,12 @@ http
           });
           request.on('end', () => {
             const requestData = JSON.parse(data);
+            validationField(requestData)
             const newUser = {
               id: uuid.v1(),
               name: requestData.name,
               age: requestData.age,
-              hobbies: requestData.hobbies || 'test',
+              hobbies: requestData.hobbies,
             };
             db.push(newUser);
             response.statusCode = 201;
