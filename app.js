@@ -11,7 +11,7 @@ http
   .createServer(async (request, response) => {
     response.setHeader('Content-Type', 'text/html;charset=utf-8');
     try {
-      if (request.url.match(/^\/person\/?.*$/)) {
+      if (request.url.match(/^\/person(\/.*)?$/)) {
         const url = request.url.split('/');
 
         switch (request.method) {
